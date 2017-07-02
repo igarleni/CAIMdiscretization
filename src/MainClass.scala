@@ -3,7 +3,10 @@ import org.apache.spark.SparkConf
 import org.apache.spark.rdd._
 import org.apache.spark.SparkConf
 
-object MainClass {
+import scala.collection.mutable.ArrayBuffer
+
+object MainClass
+{
   def main(args:Array[String]): Unit = 
   {
     val conf = new SparkConf()
@@ -17,6 +20,13 @@ object MainClass {
     try
     {
       //readInputString(args)
+      
+      val dataMatrix = new DataMatrix(Constants.NUM_ROWS, Constants.NUM_MEASURE_COLS, Constants.NUM_CAT_CONTEXT_COLS)
+      val singleContexts = new Array[ArrayBuffer[String]](Constants.NUM_CAT_CONTEXT_COLS)
+      for(i <- 0 until Constants.NUM_CAT_CONTEXT_COLS) singleContexts(i) = new ArrayBuffer[String]()
+      
+      println("Start reading input data...")
+      
       println("----------------App end----------------")
     }
     catch
@@ -161,4 +171,10 @@ object MainClass {
     if (found == false)
 			throw new Exception("Missing -METHOD");
   }
+  
+  def readData(filename:String, dataMatrix:DataMatrix, singleContexts: Array[ArrayBuffer[String]]): Unit =
+  {
+    
+  }
+  
 }

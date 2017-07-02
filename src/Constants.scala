@@ -1,6 +1,7 @@
 
 
-object Constants {
+object Constants 
+{
   var FILE_INPUT: String = null
   var FILE_CP_OUTPUT: String = null
   var FILE_RUNTIME_OUTPUT: String = null
