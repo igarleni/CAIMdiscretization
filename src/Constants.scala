@@ -1,7 +1,8 @@
-
+import scala.collection.mutable.ArrayBuffer
 
 object Constants 
 {
+  /*Datos de entrada*/
   var FILE_INPUT: String = null
   var FILE_CP_OUTPUT: String = null
   var FILE_RUNTIME_OUTPUT: String = null
@@ -17,7 +18,7 @@ object Constants
   
   var FIELD_DELIMITER = ";"
   
-  var MAX_VAL:Double = 0.0
+  var MAX_VAL:Double = 0
   
   var METHOD:String = null
   val MB_MDL_DP = 0	  // MDL dynamic programming
@@ -41,4 +42,11 @@ object Constants
 	val MVD = 19	      // MDL dynamic programming
 	val PCABINNING = 20
 	
+	/*Informacion obtenida durante la lectura del fichero DataReader, para uso en discretizacion*/
+	val CLASS_LABELS:ArrayBuffer[String] = new ArrayBuffer[String]()
+	var MAX_COLS:Array[Double] = new Array[Double](0)
+	var MIN_COLS:Array[Double] = new Array[Double](0)
+	var DATA_MEANS:Array[Double] = new Array[Double](0)
+	var DATA_DEVS:Array[Double] = new Array[Double](0)
+	var CRES:Array[Double] = new Array[Double](0)
 }

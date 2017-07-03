@@ -19,13 +19,19 @@ object MainClass
     println("----------------App init----------------")
     try
     {
-      //readInputString(args)
+      readInputString(args)
+      for(i <- 0 until args.length) println("arg " + i +" -> " + args(i))
       
       val dataMatrix = new DataMatrix(Constants.NUM_ROWS, Constants.NUM_MEASURE_COLS, Constants.NUM_CAT_CONTEXT_COLS)
+      /*singleContexts = todos los posibles valores unicos de las dimensiones categoricas*/
       val singleContexts = new Array[ArrayBuffer[String]](Constants.NUM_CAT_CONTEXT_COLS)
       for(i <- 0 until Constants.NUM_CAT_CONTEXT_COLS) singleContexts(i) = new ArrayBuffer[String]()
       
+      println()
+      dataMatrix.catCols = 4
       println("Start reading input data...")
+      //val inFile = sc.textFile(Constants.FILE_INPUT)
+      DataReader.readData(Constants.FILE_INPUT, dataMatrix, singleContexts);
       
       println("----------------App end----------------")
     }
@@ -60,8 +66,6 @@ object MainClass
         found = true
       }
     }
-    if (found == false)
-			throw new Exception("Missing -FILE_IDIST");
     
     found = false
     for (i <- 0 until total if !found)
@@ -144,15 +148,13 @@ object MainClass
         found = true
       }
     }
-    if (found == false)
-			throw new Exception("Missing -FIELD_DELIMITER");
     
     found = false
     for (i <- 0 until total if !found)
     {
       if (args(i).equals("-MAX_VAL"))
       {
-        Constants.MAX_VAL = args(i+1).toInt
+        Constants.MAX_VAL = args(i+1).toDouble
         found = true
       }
     }
@@ -170,11 +172,6 @@ object MainClass
     }
     if (found == false)
 			throw new Exception("Missing -METHOD");
-  }
-  
-  def readData(filename:String, dataMatrix:DataMatrix, singleContexts: Array[ArrayBuffer[String]]): Unit =
-  {
-    
   }
   
 }

@@ -1,2 +1,24 @@
 ----------------App init----------------
+arg 0 -> -FILE_INPUT
+arg 1 -> example/simple.csv
+arg 2 -> -FILE_CP_OUTPUT
+arg 3 -> cuts.txt
+arg 4 -> -FILE_RUNTIME_OUTPUT
+arg 5 -> runtime.txt
+arg 6 -> -FILE_DATA_OUTPUT
+arg 7 -> out.txt
+arg 8 -> -NUM_ROWS
+arg 9 -> 209
+arg 10 -> -NUM_MEASURE_COLS
+arg 11 -> 2
+arg 12 -> -NUM_CAT_CONTEXT_COLS
+arg 13 -> 0
+arg 14 -> -MAX_VAL
+arg 15 -> 1.0
+arg 16 -> -METHOD
+arg 17 -> 0
+
+Start reading input data...
+antes 4
+despues 5
 ----------------App end----------------
