@@ -47,6 +47,4 @@ object Constants
 	var MAX_COLS:Array[Double] = new Array[Double](0)
 	var MIN_COLS:Array[Double] = new Array[Double](0)
 	var DATA_MEANS:Array[Double] = new Array[Double](0)
-	var DATA_DEVS:Array[Double] = new Array[Double](0)
-	var CRES:Array[Double] = new Array[Double](0)
 }

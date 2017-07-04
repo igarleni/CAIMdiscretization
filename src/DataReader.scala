@@ -12,14 +12,11 @@ object DataReader {
     Constants.MAX_COLS = new Array[Double](dataMatrix.cols)
 	  Constants.MIN_COLS = new Array[Double](dataMatrix.cols)
 	  Constants.DATA_MEANS = new Array[Double](dataMatrix.cols)
-	  Constants.DATA_DEVS = new Array[Double](dataMatrix.cols)
-	  Constants.CRES = new Array[Double](dataMatrix.cols)
 	  for(i <- 0 until dataMatrix.cols)
 	  {
 	    Constants.MAX_COLS(i) = -Double.MaxValue
 	    Constants.MIN_COLS(i) = Double.MaxValue
 	    Constants.DATA_MEANS(i) = 0
-	    Constants.DATA_DEVS(i) = 0
 	  }
     
     for(l <- lineIterator if !l.contains('?'))
@@ -37,9 +34,9 @@ object DataReader {
       newPoint.classID = new String(splitLine(dataMatrix.catCols + dataMatrix.cols))
       var exist = false
       for (i <- Constants.CLASS_LABELS if i.equals(newPoint.classID)) exist = true
-      if (!exist)
-        Constants.CLASS_LABELS.+= (newPoint.classID);
-      
+      if (!exist){
+        Constants.CLASS_LABELS.+= (newPoint.classID)
+      }
       /*Leemos los datos de las dimensiones numericas del punto nuevo y calculamos
       el maximo de cada dimension al mismo tiempo*/
       for(i <- 0 until dataMatrix.cols)
@@ -50,6 +47,7 @@ object DataReader {
         if (newPoint.measures(i) < Constants.MIN_COLS(i)) 
           Constants.MIN_COLS(i) = newPoint.measures(i);
       }
+      
       
       /*Leemos los datos de las dimensiones categoricas del punto y creamos una lista de los posibles
       valores de cada dimension en singleContexts*/
@@ -65,12 +63,17 @@ object DataReader {
         
       }
       
-      dataMatrix.data += newPoint
+      dataMatrix.data += (newPoint)
       
     }
+    source.close
     
-    /*Calculo de la media de cada dimension numerica*/
-    for (i <- 0 until dataMatrix.rows)
+    /*Guardamos el numero de filas*/
+    dataMatrix.rows = countUniversalID
+    Constants.NUM_ROWS = countUniversalID
+    
+    /*Calculo de la media de cada dimension numerica y normalizacion de valores*/
+    for (i <- 0 until countUniversalID)
     {
       val newPoint = dataMatrix.data(i)
       for (j <- 0 until dataMatrix.cols)
@@ -85,17 +88,10 @@ object DataReader {
         else if (newPoint.measures(j) < -Constants.MAX_VAL)
           newPoint.measures(j) = - Constants.MAX_VAL;
         
-        Constants.DATA_MEANS(j) += newPoint.measures(j) / dataMatrix.rows
+        Constants.DATA_MEANS(j) += newPoint.measures(j) / countUniversalID
       }
-    }
-    /*Calculo de DEVS y CRES de cada dimension numerica*/
+    }    
     
-    /*Ordenamos los puntos segun CRES*/
-    
-    /*Guardamos el numero de filas, por si el usuario los ha pasado mal*/
-    dataMatrix.rows = countUniversalID
-    Constants.NUM_ROWS = countUniversalID
-    source.close
   }
   
 }

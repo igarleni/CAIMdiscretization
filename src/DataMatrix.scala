@@ -7,6 +7,13 @@ class DataMatrix
   var catCols = 0
   var data = ArrayBuffer[DataPoint]()
   
+  def this(inCols:Int,inCatCols:Int)
+  {
+    this()
+    cols = inCols
+    catCols = inCatCols
+  }
+  
   def this(inRows:Int,inCols:Int,inCatCols:Int)
   {
     this()

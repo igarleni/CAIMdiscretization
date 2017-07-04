@@ -22,17 +22,28 @@ object MainClass
       readInputString(args)
       for(i <- 0 until args.length) println("arg " + i +" -> " + args(i))
       
-      val dataMatrix = new DataMatrix(Constants.NUM_ROWS, Constants.NUM_MEASURE_COLS, Constants.NUM_CAT_CONTEXT_COLS)
+      val dataMatrix = new DataMatrix(Constants.NUM_MEASURE_COLS, Constants.NUM_CAT_CONTEXT_COLS)
       /*singleContexts = todos los posibles valores unicos de las dimensiones categoricas*/
       val singleContexts = new Array[ArrayBuffer[String]](Constants.NUM_CAT_CONTEXT_COLS)
       for(i <- 0 until Constants.NUM_CAT_CONTEXT_COLS) singleContexts(i) = new ArrayBuffer[String]()
       
       println()
-      dataMatrix.catCols = 4
       println("Start reading input data...")
       //val inFile = sc.textFile(Constants.FILE_INPUT)
       DataReader.readData(Constants.FILE_INPUT, dataMatrix, singleContexts);
+      println("Finish reading input data.")
       
+      var count = 1
+      for(i <- dataMatrix.data)
+      {
+        print("Dato " + count + " -> ")
+        for(j <- i.measures)
+        {
+          print("; " + j)
+        }
+        println
+        count += 1
+      }
       println("----------------App end----------------")
     }
     catch
@@ -102,18 +113,6 @@ object MainClass
     }
     if (found == false)
 			throw new Exception("Missing -FILE_DATA_OUTPUT");
-    
-    found = false
-    for (i <- 0 until total if !found)
-    {
-      if (args(i).equals("-NUM_ROWS"))
-      {
-        Constants.NUM_ROWS = args(i+1).toInt
-        found = true
-      }
-    }
-    if (found == false)
-			throw new Exception("Missing -NUM_ROWS");
     
     found = false
     for (i <- 0 until total if !found)
