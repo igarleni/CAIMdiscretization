@@ -19,6 +19,8 @@ object MainClass
     println("----------------App init----------------")
     try
     {
+      /*LECTURA DE DATOS Y CALCULO DE INFORMACION BASICA*/
+      
       readInputString(args)
       for(i <- 0 until args.length) println("arg " + i +" -> " + args(i))
       
@@ -31,20 +33,13 @@ object MainClass
       println("Start reading input data...")
       //val inFile = sc.textFile(Constants.FILE_INPUT)
       DataReader.readData(Constants.FILE_INPUT, dataMatrix, singleContexts);
-      println("Finish reading input data.")
+      println("End reading input data.")
       
-      var count = 1
-      for(i <- dataMatrix.data)
-      {
-        print("Dato " + count + " -> ")
-        for(j <- i.measures)
-        {
-          print("; " + j)
-        }
-        println
-        count += 1
-      }
-      println("----------------App end----------------")
+      
+      /*CALCULO DE LA DISCRETIZACION*/
+      println("Start discretization...")
+      
+      val finalBins:Array[ArrayBuffer[MacroBin]] = CAIM.discretizeData(dataMatrix)
     }
     catch
     {

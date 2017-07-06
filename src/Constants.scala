@@ -43,8 +43,8 @@ object Constants
 	val PCABINNING = 20
 	
 	/*Informacion obtenida durante la lectura del fichero DataReader, para uso en discretizacion*/
-	val CLASS_LABELS:ArrayBuffer[String] = new ArrayBuffer[String]()
-	var MAX_COLS:Array[Double] = new Array[Double](0)
-	var MIN_COLS:Array[Double] = new Array[Double](0)
-	var DATA_MEANS:Array[Double] = new Array[Double](0)
+	val CLASS_LABELS:ArrayBuffer[String] = ArrayBuffer[String]()
+	var MAX_COLS:Array[Double] = null
+	var MIN_COLS:Array[Double] = null
+	var DATA_MEANS:Array[Double] = null
 }
