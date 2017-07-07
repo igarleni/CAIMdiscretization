@@ -1,6 +1,6 @@
 import scala.collection.mutable.ArrayBuffer
 
-class MicroBin (lowerBound:Double, upperBound:Double){
+class MicroBin (val lowerBound:Double,val upperBound:Double){
   val distinctValues = ArrayBuffer[Double]()
   val distinctValueSupports = ArrayBuffer[Integer]()
   val allValues = ArrayBuffer[Double]()
