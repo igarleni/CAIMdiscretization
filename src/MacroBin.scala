@@ -1,6 +1,6 @@
 import scala.collection.mutable.ArrayBuffer
 
-class MacroBin (val lowerBound:Double,val uperBound:Double){
+class MacroBin (val lowerBound:Double,val upperBound:Double){
   val microBinsIDs = ArrayBuffer[Integer]()
   val pointsIDs = ArrayBuffer[Integer]()
   var mdh:Array[Integer] = null
