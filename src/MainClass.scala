@@ -40,7 +40,6 @@ object MainClass
       DataReader.readData(Constants.FILE_INPUT, dataMatrix, singleContexts);
       println("End reading input data.")
       
-      
       /*CALCULO DE LA DISCRETIZACION*/
       println("Start discretization...")
       
@@ -277,18 +276,6 @@ object MainClass
     }
     if (found == false)
 			throw new Exception("Missing -FILE_CP_OUTPUT");
-    
-    found = false
-    for (i <- 0 until total if !found)
-    {
-      if (args(i).equals("-FILE_RUNTIME_OUTPUT"))
-      {
-        Constants.FILE_RUNTIME_OUTPUT = args(i+1)
-        found = true
-      }
-    }
-    if (found == false)
-			throw new Exception("Missing -FILE_RUNTIME_OUTPUT");
     
     found = false
     for (i <- 0 until total if !found)

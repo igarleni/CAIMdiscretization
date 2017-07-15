@@ -5,7 +5,6 @@ object Constants
   /*Datos de entrada*/
   var FILE_INPUT: String = null
   var FILE_CP_OUTPUT: String = null
-  var FILE_RUNTIME_OUTPUT: String = null
   var FILE_DATA_OUTPUT: String = null
   var FILE_ORG_INPUT: String = null
   var FILE_ORG_NORMAL_INPUT: String = null

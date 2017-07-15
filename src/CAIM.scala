@@ -30,39 +30,38 @@ object CAIM {
     var remainingCPs = ArrayBuffer[Double]()
     remainingCPs += currentValue
     for (i <- 1 until dataSorted.length)
-      if (dataSorted(i-1) != currentValue) 
+      if (dataSorted(i) != currentValue) 
       {
-        remainingCPs += dataSorted(i-1)
-        currentValue = dataSorted(i-1)
+        remainingCPs += dataSorted(i)
+        currentValue = dataSorted(i)
       }
     
     /*Extraemos el valor maximo y minimo y se lo descontamos a los CP a observar */
     val minValue = remainingCPs(0)
-    val maxValue = remainingCPs(remainingCPs.length)
+    val maxValue = remainingCPs(remainingCPs.length - 1)
     remainingCPs.remove(0)
-    remainingCPs.remove(remainingCPs.length)
+    remainingCPs.remove(remainingCPs.length - 1)
     
-    /*Valores posibles a analizar por el algoritmo*/
-    var totalCPs = remainingCPs.length
-    
-    var GlobalCAIM = 0.0
-		var tmpCAIM = 0.0
     
     /* INICIALIZACION (valores iniciales antes de entrar al bucle)
 		*
 		*  cutPoints = {maxValue} (puntos de corte escogidos)
 		*  numCPs = 1 (numero de cutPoints)
-		*  remainingCPs = (posibles intervalos, en cola para analizar)
-		*  numRemainingValues = size(remainingCPs)
-		*  GlobalBins = {minValue-maxValue}
+		*  remainingCPs = (posibles cutPoints, en cola para analizar)
+		*  numRemainingValues = length(remainingCPs)
+		*  GlobalBins = {minValue-maxValue} (bins/particiones actuales)
 		*
 		* */
     val cutPoints = ArrayBuffer[Double]()
     cutPoints += maxValue
     var numCPs = 1
+    var numRemainingValues = remainingCPs.length
     val globalBins = ArrayBuffer[MicroBin]()
     globalBins += new MicroBin(minValue - 1, maxValue)
     
+    //variables temporales de cada iteracion
+    var GlobalCAIM = 0.0
+		var tmpCAIM = 0.0
     var candidateCP = 0.0
     var pos = 0
     var found = false
@@ -75,9 +74,8 @@ object CAIM {
     var tmpMaxPos = 0
     
     val numRows = dataMatrix.rows
+    var exit = false //sustituto del break en java
     /*Mientras queden posibles CP en remainingCPs*/
-    var numRemainingValues = totalCPs - 1
-    var exit = false
     while (numRemainingValues > 0 && !exit)
     {
       tmpMaxCAIM = -Double.MaxValue
